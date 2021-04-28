@@ -1,0 +1,80 @@
+﻿@model ProjectManagement.ViewModels.SolutionViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script>
+    function onDateChange() {
+        var x = document.getElementById("from").value;
+        var y = document.getElementById("to").value;
+        var fromDate = parseInt(new Date(x).getTime() / 1000);
+        var toDate = parseInt(new Date(y).getTime() / 1000);
+        var timeDiff = (toDate - fromDate) / 3600;
+        document.getElementById("time").innerHTML = "Current time = " + timeDiff;
+    }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>SolutionViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.From, new { @class = "form-control", @id = "from", @type = "datetime-local", @oninput = "onDateChange()" })
+            @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.To, new { @class = "form-control", @id = "to", @type = "datetime-local", @oninput = "onDateChange()" })
+            @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="time"></div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-1">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+        <div class="col-md-8">
+            @Html.ActionLink("Back to Project Details", "Details", "Projects", new { id = ViewContext.RouteData.Values["projectId"] }, new { @class = "btn btn-primary", @style = "color:White;" })
+        </div>
+    </div>
+</div>
+}

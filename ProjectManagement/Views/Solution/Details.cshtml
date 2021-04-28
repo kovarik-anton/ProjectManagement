@@ -1,0 +1,55 @@
+﻿@model ProjectManagement.ViewModels.SolutionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd style="word-break:break-word">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", $"{ViewContext.RouteData.Values["projectId"]}/Solution/Edit/{Model.Id}", "Projects", null, new { @class = "btn btn-primary", @style = "color:White;" })
+    @Html.ActionLink("Back to Project Details", "Details", "Projects", new { id = ViewContext.RouteData.Values["projectId"] }, new { @class = "btn btn-primary", @style = "color:White;" })
+</p>

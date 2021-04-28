@@ -1,0 +1,28 @@
+﻿@using ProjectManagement.ViewModels
+@model IEnumerable<ProjectViewModel>
+
+<h1>Projects</h1>
+
+@if(!Model.Any())
+{
+    <h3>No projects</h3>
+}
+
+@Html.ActionLink("Add project", "Create", null, new { @class = "btn btn-primary", @style = "color:White;"})
+<br />
+<br />
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col-md-4">
+            <div class="jumbotron">
+                <h4>Name: @p.Name</h4>
+                <div style="overflow: hidden; text-overflow: ellipsis;">description: @p.Description</div>
+                @Html.ActionLink("Edit", "Edit", new { id = p.Id }, new { @class = "btn btn-primary", @style = "color:White;" }) 
+                @Html.ActionLink("Details", "Details", new { id = p.Id }, new { @class = "btn btn-primary", @style = "color:White;" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = p.Id }, new { @class = "btn btn-primary", @style = "color:White;" })
+            </div>
+        </div>
+    }
+</div>
+
